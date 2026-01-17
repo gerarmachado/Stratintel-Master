@@ -1,0 +1,16 @@
+# Archivos de Secretos y Configuración Local
+.streamlit/secrets.toml
+.env
+api_key.txt
+
+# Archivos temporales de Python
+__pycache__/
+*.py[cod]
+
+# Entornos virtuales (si los usas)
+venv/
+env/
+.venv/
+
+# Archivos de sistema
+.DS_Store
