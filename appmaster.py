@@ -53,7 +53,7 @@ if "GOOGLE_API_KEY" in st.secrets:
 MODELO_ACTUAL = "gemini-2.5-flash"  
 
 # ==========================================
-# 🧠 BASE DE DATOS MAESTRA (V31 - GRAND UNIFIED STRATEGY)
+# 🧠 BASE DE DATOS MAESTRA (GRAND UNIFIED STRATEGY)
 # ==========================================
 DB_CONOCIMIENTO = {
     "✨ RECOMENDACIÓN AUTOMÁTICA": {
@@ -810,6 +810,7 @@ if 'res' in st.session_state:
     c1.download_button("Descargar Word", crear_word(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato']), "Reporte.docx")
     try: c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato'])), "Reporte.pdf")
     except: pass
+
 
 
 
