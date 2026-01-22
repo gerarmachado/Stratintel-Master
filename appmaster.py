@@ -560,6 +560,36 @@ DB_CONOCIMIENTO = {
     }
 }
 
+# ==========================================
+# 📘 TEXTO DEL MANUAL (CONTENIDO ESTÁTICO)
+# ==========================================
+MANUAL_USUARIO = """
+# 📘 MANUAL DE OPERACIONES | SISTEMA STRATINTEL
+
+## 1. INTRODUCCIÓN
+**StratIntel** es un Sistema de Soporte a la Decisión (DSS) diseñado para analistas de inteligencia.
+
+## 2. VERSIONES DEL SISTEMA
+* **🛡️ Versión Beta:** Solo documentos locales. Sin conexión externa.
+* **🌐 Versión Master:** Conexión Web y YouTube (si está habilitada).
+
+## 3. FLUJO DE TRABAJO
+1. **Ingesta:** Suba sus PDFs, DOCXs o pegue texto en la pestaña correspondiente.
+2. **Configuración:** Ingrese su API Key en el menú lateral.
+3. **Misión:** Seleccione las técnicas de análisis (Ej: Realismo, Prospectiva).
+4. **Profundidad:**
+    * *Estratégico:* Resumen ejecutivo.
+    * *Táctico:* Responde todas las preguntas.
+    * *Operacional:* Selección manual de preguntas.
+
+## 4. HERRAMIENTAS ESPECIALES
+* **🎨 Visualización:** Genere mapas de actores al final del reporte.
+* **🕵️ Contrainteligencia:** Cargue 2+ documentos y use la técnica "Triangulación" para hallar contradicciones.
+
+## 5. EXPORTACIÓN
+Use los botones al final para descargar el informe en Word o PDF.
+"""
+
 # --- GESTIÓN DE ESTADO ---
 if 'api_key' not in st.session_state: st.session_state['api_key'] = ""
 if 'texto_analisis' not in st.session_state: st.session_state['texto_analisis'] = ""
@@ -895,35 +925,6 @@ if 'res' in st.session_state:
     c1.download_button("Descargar Word", crear_word(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato']), "Reporte.docx")
     try: c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato'])), "Reporte.pdf")
     except: pass
-# ==========================================
-# 📘 TEXTO DEL MANUAL (CONTENIDO ESTÁTICO)
-# ==========================================
-MANUAL_USUARIO = """
-# 📘 MANUAL DE OPERACIONES | SISTEMA STRATINTEL
-
-## 1. INTRODUCCIÓN
-**StratIntel** es un Sistema de Soporte a la Decisión (DSS) diseñado para analistas de inteligencia.
-
-## 2. VERSIONES DEL SISTEMA
-* **🛡️ Versión Beta:** Solo documentos locales. Sin conexión externa.
-* **🌐 Versión Master:** Conexión Web y YouTube (si está habilitada).
-
-## 3. FLUJO DE TRABAJO
-1. **Ingesta:** Suba sus PDFs, DOCXs o pegue texto en la pestaña correspondiente.
-2. **Configuración:** Ingrese su API Key en el menú lateral.
-3. **Misión:** Seleccione las técnicas de análisis (Ej: Realismo, Prospectiva).
-4. **Profundidad:**
-    * *Estratégico:* Resumen ejecutivo.
-    * *Táctico:* Responde todas las preguntas.
-    * *Operacional:* Selección manual de preguntas.
-
-## 4. HERRAMIENTAS ESPECIALES
-* **🎨 Visualización:** Genere mapas de actores al final del reporte.
-* **🕵️ Contrainteligencia:** Cargue 2+ documentos y use la técnica "Triangulación" para hallar contradicciones.
-
-## 5. EXPORTACIÓN
-Use los botones al final para descargar el informe en Word o PDF.
-"""
 
 
 
