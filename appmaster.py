@@ -496,10 +496,10 @@ DB_CONOCIMIENTO = {
     "Michel Godet (Prospectiva Estratégica)": {
         "desc": "De la anticipación a la acción (El Triángulo Griego: Anticipación, Apropiación, Acción).",
         "preguntas": [
-            "Preactividad vs Proactividad: ¿Nos estamos preparando para cambios esperados (seguro) o estamos provocando los cambios deseados (apuesta)?",
-            "Análisis Estructural (MICMAC): ¿Cuáles son las variables motrices ocultas que realmente controlan el sistema, más allá de las visibles?",
-            "Juego de Actores (MACTOR): ¿Existen alianzas latentes o conflictos de intereses entre actores que podrían bloquear o facilitar el escenario apuesta?",
-            "Escenarios Futuribles: Diferencia entre el escenario 'tendencial' (si no hacemos nada) y el escenario 'contrastado' (ruptura extrema)."
+            "Actitud Estratégica: ¿El actor es reactivo (apaga fuegos), preactivo (se prepara para lo inevitable) o proactivo (provoca el cambio deseado)?",
+            "Variables Clave (MICMAC): Identifica las variables 'motrices' ocultas que controlan el sistema (causas raíz) vs las variables 'dependientes' (síntomas).",
+            "Juego de Actores (MACTOR): ¿Qué convergencias (aliados) y divergencias (conflictos) de objetivos existen y quién tiene la fuerza para imponer su voluntad?",
+            "El Camino Estratégico: Contrasta el 'Escenario Probable' (tendencial) con el 'Escenario Deseable'. ¿Qué acciones concretas deben tomarse para cerrar esa brecha?"
         ]
     },
     "Nassim Taleb (Cisne Negro & Antifragilidad)": {
@@ -858,6 +858,7 @@ if 'res' in st.session_state:
     try: c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato'])), "Reporte.pdf")
     except: pass
     
+
 
 
 
