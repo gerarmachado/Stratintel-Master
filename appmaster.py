@@ -111,6 +111,22 @@ DB_CONOCIMIENTO = {
             "Erosión Relativa: ¿El declive es absoluto o simplemente los rivales están creciendo más rápido?"
         ]
     },
+    "E.H. Carr (La Crisis de los Veinte Años)": {
+        "desc": "La crítica al utopismo liberal y la realidad del poder.",
+        "preguntas": [
+            "La Armonía de Intereses (Ilusión): ¿Están las potencias dominantes disfrazando sus propios intereses egoístas como 'valores universales' o 'bien común'?",
+            "El Elemento Poder: ¿Se está ignorando que la política es, en última instancia, una lucha por el poder y no una discusión ética?",
+            "Moralidad del Estado: ¿La moralidad que se predica es consistente con la capacidad real de ejercerla?"
+        ]
+    },
+    "Ray Cline (La Fórmula del Poder)": {
+        "desc": "Pp = (C + E + M) * (S + W) -> Potencial de Poder.",
+        "preguntas": [
+            "Masa Crítica (C): Evalúa Población + Territorio. ¿Tiene el estado la base física suficiente?",
+            "Capacidad Económica y Militar (E + M): ¿Cuál es su fuerza bruta tangible?",
+            "Estrategia y Voluntad (S + W): Estos son los multiplicadores. ¿Tiene el país una estrategia clara (S)? ¿Tiene el pueblo la voluntad nacional (W) de luchar? (Si esto es cero, el poder total es cero)."
+        ]
+    },
     
     # 1.3 REALISMO PURO Y GEOPOLÍTICA DURA ------------------------------------
     "Halford Mackinder (Teoría del Heartland)": {
@@ -136,6 +152,14 @@ DB_CONOCIMIENTO = {
             "Interés y Poder: Define el 'Interés Nacional' de los actores en términos de poder, no de moralidad.",
             "Supervivencia del Estado: ¿Está la integridad territorial o política del Estado en riesgo directo?",
             "Autonomía de la Esfera Política: Analiza la decisión desde una lógica puramente política, ignorando consideraciones económicas o legales secundarias."
+        ]
+    },
+    "Hans Morgenthau (El Gran Debate: Realismo vs Legalismo)": {
+        "desc": "La lucha contra el enfoque legalista-moralista en política exterior.",
+        "preguntas": [
+            "Prudencia vs Moral Abstracta: ¿Se está juzgando la acción política por sus consecuencias políticas (Prudencia) o por principios morales abstractos que llevarán al desastre?",
+            "Interés Nacional Objetivo: ¿El líder está actuando para salvar la nación o para satisfacer una ideología personal?",
+            "La Autonomía de lo Político: ¿Se está permitiendo que abogados o economistas dicten decisiones que deberían ser puramente estratégicas?"
         ]
     },
     "Kenneth Waltz (Neorrealismo / Imágenes)": {
@@ -222,6 +246,22 @@ DB_CONOCIMIENTO = {
             "Estructura Ideacional: ¿Cómo las identidades históricas y normas sociales definen el interés nacional?",
             "Ciclo de Refuerzo: ¿Cómo las interacciones pasadas han construido la percepción actual de 'amenaza'?",
             "Normas Internacionales: ¿Qué normas están constriñendo o habilitando la acción?"
+        ]
+    },
+    "Teoría de la Integración Económica (Etapas y Modelos)": {
+        "desc": "Niveles de fusión de mercados (Balassa y otros).",
+        "preguntas": [
+            "Nivel de Integración: ¿En qué fase están? 1) Zona de Libre Comercio (eliminar aranceles), 2) Unión Aduanera (arancel externo común), 3) Mercado Común (movilidad de factores), 4) Unión Económica (política fiscal/monetaria).",
+            "Creación vs Desviación de Comercio: ¿El acuerdo genera riqueza real o simplemente desplaza a proveedores más eficientes externos?",
+            "Spillover (Desbordamiento): ¿La integración económica está forzando inevitablemente la integración política?"
+        ]
+    },
+    "Esther Barbé (Multilateralismo y Potencias Emergentes)": {
+        "desc": "Adaptación del orden internacional y contestación normativa.",
+        "preguntas": [
+            "Contestación Normativa: ¿Las potencias emergentes están desafiando las reglas del juego o solo quieren un asiento en la mesa?",
+            "Multilateralismo a la Carta: ¿Están los actores eligiendo selectivamente qué normas cumplir y cuáles ignorar?",
+            "Cambio de Poder: ¿Las instituciones actuales reflejan la distribución real de poder o están obsoletas?"
         ]
     },
     "Samuel Huntington (Choque de Civilizaciones)": {
@@ -406,6 +446,23 @@ DB_CONOCIMIENTO = {
             "Colapso del Adversario: ¿Cómo podemos generar ambigüedad para aislar al enemigo de su entorno?"
         ]
     },
+    "Sherman Kent (Doctrina de Inteligencia Estratégica)": {
+        "desc": "Los fundamentos clásicos: Inteligencia como Conocimiento, Organización y Actividad.",
+        "preguntas": [
+            "La Pirámide de Kent: Clasifica la información analizada. ¿Es Nivel 1 (Hechos/Descriptivo), Nivel 2 (Tendencias/Explicativo) o Nivel 3 (Estimativo/Predictivo)?",
+            "Lenguaje Probabilístico: ¿Se utilizan términos de probabilidad estimativa precisos (ej: 'Muy Probable', 'Posibilidad Remota') o se usa lenguaje ambiguo para evitar responsabilidad (ej: 'podría', 'quizás')?",
+            "Ecuación de Riesgo: ¿Se están evaluando las 'Capacidades' (lo que el adversario PUEDE hacer) separadas de las 'Intenciones' (lo que QUIERE hacer)?",
+            "Relación Productor-Consumidor: ¿El análisis mantiene la objetividad necesaria o parece haber sido redactado para complacer una decisión política ya tomada (Politización)?"
+        ]
+    },
+    "Marcelo de los Reyes (Inteligencia y RRII)": {
+        "desc": "La inteligencia como insumo crítico para la política exterior.",
+        "preguntas": [
+            "Politización de la Inteligencia: ¿Se está produciendo inteligencia para complacer al decisor político (Inteligencia a la carta)?",
+            "Diplomacia Paralela: ¿Están los servicios de inteligencia actuando como canales diplomáticos secretos?",
+            "Sorpresa Estratégica: ¿Falló la inteligencia por falta de datos o por falta de imaginación para interpretar las señales?"
+        ]
+    },
     
     # =========================================================================
     # 🌐 BLOQUE 7: CIBERINTELIGENCIA Y REDES
@@ -470,6 +527,14 @@ DB_CONOCIMIENTO = {
             "Ego: ¿Se siente infravalorado o busca venganza?"
         ]
     },
+    "Allan Pease (Lenguaje No Verbal y Poder)": {
+        "desc": "Lectura de gestos, posturas y congruencia.",
+        "preguntas": [
+            "Congruencia: ¿Lo que dice el líder verbalmente coincide con sus gestos? (Si no, el gesto dice la verdad).",
+            "Gestos de Poder y Dominio: ¿Usa la 'Cúpula de Poder' (manos), palmas ocultas o toma de espacio territorial?",
+            "Microexpresiones: ¿Hay fugas faciales de miedo, desprecio o ira en momentos clave del discurso?"
+        ]
+    },
     "Gustave Le Bon (Psicología de Masas)": {
         "desc": "Comportamiento irracional y contagio emocional.",
         "preguntas": [
@@ -478,7 +543,32 @@ DB_CONOCIMIENTO = {
             "Imágenes Simplistas: ¿Qué eslóganes reemplazan el pensamiento lógico?"
         ]
     },
-
+    "David Alandete (Fake News: Arma de Destrucción Masiva)": {
+        "desc": "Desinformación, polarización y algoritmos.",
+        "preguntas": [
+            "Objetivo de la Desinformación: ¿Buscan convencer de una mentira o simplemente sembrar duda y caos para paralizar la sociedad?",
+            "Cámaras de Eco: ¿Se está usando el algoritmo para radicalizar grupos específicos?",
+            "Actores Proxy: ¿Quién está amplificando el mensaje? (Bots, tontos útiles, medios estatales disfrazados)."
+        ]
+    },
+    "Harold Lasswell (Teoría de la Propaganda)": {
+        "desc": "Gestión de actitudes colectivas y símbolos.",
+        "preguntas": [
+            "Fórmula de Lasswell: ¿QUIÉN (control) dice QUÉ (contenido) a QUIÉN (audiencia) en qué CANAL (medio) con qué EFECTO?",
+            "Gestión de Símbolos: ¿Qué mitos, himnos o banderas se están manipulando para evocar emociones irracionales?",
+            "Movilización del Odio: ¿Se está dirigiendo la agresividad colectiva hacia un enemigo común fabricado?"
+        ]
+    },
+    "Joseph Goebbels (Los 11 Principios de la Propaganda)": {
+        "desc": "Tácticas de manipulación de masas.",
+        "preguntas": [
+            "Principio de Simplificación: ¿Se ha reducido todo el problema a un único eslogan o enemigo?",
+            "Principio de Orquestación: ¿Se repite la misma mentira incansablemente desde diferentes ángulos hasta que parece verdad?",
+            "Principio de Transfusión: ¿Se están explotando odios o prejuicios preexistentes en la cultura para atacar al rival?",
+            "Principio de la Unanimidad: ¿Se crea la falsa impresión de que 'todo el mundo' piensa así?"
+        ]
+    },
+    
     # =========================================================================
     # 🔮 BLOQUE 9: PROSPECTIVA Y COMPLEJIDAD
     # =========================================================================
@@ -925,6 +1015,7 @@ if 'res' in st.session_state:
     c1.download_button("Descargar Word", crear_word(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato']), "Reporte.docx")
     try: c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato'])), "Reporte.pdf")
     except: pass
+
 
 
 
