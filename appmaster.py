@@ -686,30 +686,94 @@ DB_CONOCIMIENTO = {
 # 📘 TEXTO DEL MANUAL (CONTENIDO ESTÁTICO)
 # ==========================================
 MANUAL_USUARIO = """
-# 📘 MANUAL DE OPERACIONES | SISTEMA STRATINTEL
+# ==========================================
+# 📘 TEXTO DEL MANUAL (ACTUALIZADO V33)
+# ==========================================
+MANUAL_USUARIO = """
+# 📘 MANUAL INTEGRAL | SISTEMA STRATINTEL (V33)
 
-## 1. INTRODUCCIÓN
-**StratIntel** es un Sistema de Soporte a la Decisión (DSS) diseñado para analistas de inteligencia.
+## PARTE 1: OPERACIONES TÉCNICAS
+**1. INTRODUCCIÓN**
+StratIntel es un Sistema de Soporte a la Decisión (DSS) que utiliza IA para aplicar marcos teóricos de inteligencia y relaciones internacionales a documentos no estructurados.
 
-## 2. VERSIONES DEL SISTEMA
-* **🛡️ Versión Beta:** Solo documentos locales. Sin conexión externa.
-* **🌐 Versión Master:** Conexión Web y YouTube (si está habilitada).
-
-## 3. FLUJO DE TRABAJO
-1. **Ingesta:** Suba sus PDFs, DOCXs o pegue texto en la pestaña correspondiente.
-2. **Configuración:** Ingrese su API Key en el menú lateral.
-3. **Misión:** Seleccione las técnicas de análisis (Ej: Realismo, Prospectiva).
-4. **Profundidad:**
-    * *Estratégico:* Resumen ejecutivo.
-    * *Táctico:* Responde todas las preguntas.
+**2. FLUJO DE TRABAJO BÁSICO**
+1.  **Ingesta:** Suba sus PDFs, DOCXs o pegue texto en la pestaña correspondiente.
+2.  **Configuración:** Ingrese su API Key en el menú lateral.
+3.  **Selección:** Elija el Marco Teórico adecuado para su misión (Ver Parte 2).
+4.  **Profundidad:**
+    * *Estratégico:* Resumen ejecutivo (BLUF).
+    * *Táctico:* Responde todas las preguntas teóricas.
     * *Operacional:* Selección manual de preguntas.
 
-## 4. HERRAMIENTAS ESPECIALES
-* **🎨 Visualización:** Genere mapas de actores al final del reporte.
+**3. HERRAMIENTAS ESPECIALES**
+* **🎨 Visualización:** (Si está activo) Genera esquemas de actores al final del reporte.
 * **🕵️ Contrainteligencia:** Cargue 2+ documentos y use la técnica "Triangulación" para hallar contradicciones.
+* **💾 Exportación:** Use los botones al final para descargar en Word o PDF.
 
-## 5. EXPORTACIÓN
-Use los botones al final para descargar el informe en Word o PDF.
+---
+
+## PARTE 2: DICCIONARIO DE DOCTRINA Y ANÁLISIS
+*Guía de referencia para interpretar los resultados de cada técnica.*
+
+### 🌍 BLOQUE 1: ESTRUCTURA Y PODER
+* **Fuerzas Profundas (Renouvin & Duroselle):** Analiza si el conflicto es causado por la voluntad de un líder o por corrientes históricas inevitables (geografía, demografía).
+* **Ciclos Imperiales (Kennedy & Duroselle):** Busca síntomas de "Sobrestiramiento Imperial" (gasto militar excesivo) o decadencia interna en grandes potencias.
+* **Venganza de la Geografía (Kaplan):** Identifica cómo el mapa físico (montañas, ríos) dicta el destino político y las zonas de conflicto (Shatterbelts).
+* **Realismo Clásico (Morgenthau, Carr, Cline):**
+    * *Morgenthau:* Evalúa el interés nacional en términos de poder y supervivencia, ignorando la moral.
+    * *Carr:* Detecta la hipocresía de potencias que disfrazan intereses egoístas como "valores universales".
+    * *Cline:* Calcula el potencial de poder: $Pp = (C + E + M) * (S + W)$.
+* **Geopolítica Dura (Mackinder & Spykman):** Analiza el control territorial global. ¿Quién domina el "Corazón Continental" (Heartland) y quién los bordes costeros (Rimland)?
+* **Neorrealismo (Waltz & Mearsheimer):**
+    * *Defensivo (Waltz):* El estado solo busca seguridad.
+    * *Ofensivo (Mearsheimer):* El estado busca hegemonía total y aprovechará cualquier oportunidad para debilitar rivales.
+
+### 🤝 BLOQUE 2: INSTITUCIONES E IDENTIDAD
+* **Poder Multidimensional (Nye):** Evalúa el uso de *Soft Power* (atracción cultural) y *Smart Power* (combinación de fuerza y diplomacia).
+* **Paz Liberal (Kant & Keohane):** Analiza si el comercio y las instituciones internacionales hacen que la guerra sea "demasiado costosa" (Interdependencia).
+* **Constructivismo (Wendt & Huntington):**
+    * *Wendt:* ¿El enemigo es una construcción social?
+    * *Huntington:* ¿Es un choque de civilizaciones (identidad cultural/religiosa) y no ideológico?
+
+### ⚔️ BLOQUE 3: ESTRATEGIA MILITAR
+* **Aproximación Indirecta (Liddell Hart):** Verifica si el actor ataca la debilidad del enemigo evitando el choque frontal (físico o psicológico).
+* **Nuevas Guerras (Kaldor & Creveld):** Para conflictos modernos donde se mezcla crimen, limpieza étnica y actores no estatales (cárteles, terrorismo).
+* **Guerra Irrestricta (Qiao Liang):** Identifica el uso de "todo" como arma: leyes (Lawfare), economía, drogas y medios de comunicación.
+
+### 💰 BLOQUE 4: GEOECONOMÍA Y CAOS
+* **Economía Ilícita (Naím):** Analiza el poder de redes criminales (narco, tráfico) que erosionan al Estado.
+* **Geoeconomía (Luttwak):** El uso de la gramática del comercio (sanciones, deuda, inversiones predatorias) para fines de guerra.
+
+### 🤝 BLOQUE 5: NEGOCIACIÓN Y JUEGOS
+* **Estrategia del Conflicto (Schelling):** Analiza el uso racional de la irracionalidad, la disuasión y los puntos focales en una crisis.
+* **Teoría de Juegos (Axelrod & Nash):** Modela matemáticamente la cooperación. ¿Estamos en un dilema del prisionero (traición incentiva) o juego de la gallina (choque inminente)?
+
+### 🧠 BLOQUE 6: TOMA DE DECISIONES
+* **Modelos de Decisión (Allison):** Determina si una acción fue racional (Modelo I), una rutina burocrática (Modelo II) o resultado de peleas políticas internas (Modelo III).
+* **Ciclo OODA (Boyd):** Evalúa la velocidad de reacción: Observar, Orientar, Decidir, Actuar. Quien completa el ciclo más rápido, gana.
+* **Sherman Kent (Calidad de Inteligencia):** **AUDITORÍA.** Detecta lenguaje ambiguo, confusión entre Capacidad e Intención, y politización del informe.
+
+### 🌐 BLOQUE 7: CIBERINTELIGENCIA
+* **Cyber Kill Chain:** Desglosa ataques digitales en fases (Reconocimiento -> Entrega -> Explotación).
+* **Modelo Diamante:** Relaciona al Adversario con su Infraestructura, Capacidades y Víctimas.
+
+### 🧠 BLOQUE 8: PSICOLOGÍA Y MENTE
+* **Perfilado Oscuro (Dark Triad & MICE):** Evalúa líderes por Narcisismo/Psicopatía y busca motivos de traición (Dinero, Ideología, Coerción, Ego).
+* **Propaganda (Goebbels, Bernays, Sunstein):**
+    * *Goebbels:* Principios de simplificación y repetición.
+    * *Bernays:* Ingeniería del consentimiento mediante "autoridad de terceros".
+    * *Sunstein:* Viralidad de rumores y cámaras de eco.
+    * *Key:* Seducción subliminal y ataques al subconsciente.
+
+### 🔮 BLOQUE 9: PROSPECTIVA (FUTUROS)
+* **Michel Godet:** Construcción de escenarios. Distingue variables motrices (causas) de dependientes (síntomas) y define el juego de actores.
+* **Cisnes Negros (Taleb):** Identifica eventos improbables de alto impacto o amenazas obvias ignoradas (Rinocerontes Grises).
+
+### 🕵️ BLOQUE 10: VERIFICACIÓN
+* **Triangulación (Cross-Check):** Técnica forense. Compara documentos para hallar contradicciones, silencios y cambios de narrativa.
+
+---
+*Documentación Oficial del Sistema StratIntel | Uso Confidencial*
 """
 
 # --- GESTIÓN DE ESTADO ---
@@ -1047,6 +1111,7 @@ if 'res' in st.session_state:
     c1.download_button("Descargar Word", crear_word(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato']), "Reporte.docx")
     try: c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato'])), "Reporte.pdf")
     except: pass
+
 
 
 
