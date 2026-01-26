@@ -360,6 +360,14 @@ DB_CONOCIMIENTO = {
             "Fronteras Porosas: ¿El mapa político oficial ha dejado de representar la realidad del control territorial?"
         ]
     },
+    "Holm y Sorensen (Globalización Desigual)": {
+        "desc": "¿De quién es el orden mundial? El fin de la Guerra Fría y la brecha Norte-Sur.",
+        "preguntas": [
+            "Ganadores y Perdedores: La globalización no es uniforme. ¿Quién se está integrando en el núcleo económico y quién está siendo marginado a la periferia irrelevante?",
+            "Soberanía Fragmentada: ¿El Estado está perdiendo control frente a fuerzas globales (mercados) o frente a fuerzas locales (fragmentación étnica/regional)?",
+            "El Dilema del Estado Débil: ¿Se está imponiendo un modelo de 'democracia liberal' en un estado que carece de las estructuras básicas para sostenerlo?"
+        ]
+    },
     "Edward Luttwak (Geoeconomía)": {
         "desc": "La lógica del conflicto con la gramática del comercio.",
         "preguntas": [
@@ -549,6 +557,30 @@ DB_CONOCIMIENTO = {
             "Objetivo de la Desinformación: ¿Buscan convencer de una mentira o simplemente sembrar duda y caos para paralizar la sociedad?",
             "Cámaras de Eco: ¿Se está usando el algoritmo para radicalizar grupos específicos?",
             "Actores Proxy: ¿Quién está amplificando el mensaje? (Bots, tontos útiles, medios estatales disfrazados)."
+        ]
+    },
+    "Edward Bernays (Propaganda y Relaciones Públicas)": {
+        "desc": "La ingeniería del consentimiento y la manipulación de la 'mente de grupo'.",
+        "preguntas": [
+            "Autoridad de Terceros: ¿El mensaje utiliza a 'expertos independientes' (médicos, científicos) para vender una idea y burlar el escepticismo?",
+            "Creación de Eventos: ¿La noticia es un hecho espontáneo o un 'pseudo-evento' fabricado para generar cobertura mediática?",
+            "Apelación al Instinto Gregario: ¿Se presenta la idea como algo que 'todos los líderes inteligentes' ya aceptan, aislando al disidente?"
+        ]
+    },
+    "Cass R. Sunstein (Rumorología y Cascadas de Información)": {
+        "desc": "Cómo se propagan las creencias falsas y la polarización de grupos.",
+        "preguntas": [
+            "Cascadas de Disponibilidad: ¿El rumor se ha vuelto creíble solo porque 'se repite en todas partes' (reputación social) y no por evidencia real?",
+            "Polarización de Grupo: ¿El debate interno está volviendo al grupo más extremo de lo que era al principio?",
+            "Asimilación Sesgada: ¿Los actores están aceptando ciegamente la información que confirma sus sesgos y descartando agresivamente la evidencia contraria?"
+        ]
+    },
+    "Wilson Bryan Key (Seducción Subliminal)": {
+        "desc": "Estímulos ocultos que apelan al subconsciente (Eros y Thanatos).",
+        "preguntas": [
+            "Implantes Emocionales: ¿Existen elementos visuales o auditivos ocultos diseñados para provocar ansiedad o deseo sexual sin pasar por el filtro racional?",
+            "Sobrecarga Sensorial: ¿Se está bombardeando al consciente con datos irrelevantes para que el subconsciente acepte una orden oculta?",
+            "Apelación a la Muerte/Deseo: ¿El discurso o imagen juega con los miedos primarios a la extinción o con los impulsos reproductivos?"
         ]
     },
     "Harold Lasswell (Teoría de la Propaganda)": {
@@ -1015,6 +1047,7 @@ if 'res' in st.session_state:
     c1.download_button("Descargar Word", crear_word(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato']), "Reporte.docx")
     try: c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato'])), "Reporte.pdf")
     except: pass
+
 
 
 
