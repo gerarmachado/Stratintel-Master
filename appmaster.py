@@ -993,10 +993,11 @@ else:
     with c2:
         if st.button("🚀 EJECUTAR MISIÓN", type="primary", use_container_width=True, disabled=len(tecnicas_seleccionadas)==0):
             try:
+                if 'codigo_dot_mapa' in st.session_state: del st.session_state['codigo_dot_mapa']
+
                 genai.configure(api_key=st.session_state['api_key'])
                 model = genai.GenerativeModel(MODELO_ACTUAL)
                 ctx = st.session_state['texto_analisis']
-                if 'codigo_dot_mapa' in st.session_state: del st.session_state['codigo_dot_mapa']
 
                 INSTRUCCIONES_ESTILO = """
                 DIRECTRICES DE EXTENSIÓN Y FORMATO:
@@ -1017,9 +1018,13 @@ else:
                         s.update(label="✅ Hecho", state="complete", expanded=False)
                 
                 # BUCLE DE ANÁLISIS
+                informe_final += f"\n\n## 📌 {tec}\n{res.text}\n\n---\n"
+                progreso.progress((i + 1) / len(tecnicas_seleccionadas))
+                time.sleep(1)
+                
                 informe_final = f"# INFORME\nFECHA: {datetime.datetime.now().strftime('%d/%m/%Y')}\nFUENTE: {st.session_state['origen_dato']}\n\n"
                 progreso = st.progress(0)
-                
+                                
                 for i, tec in enumerate(tecnicas_seleccionadas):
                     st.caption(f"Analizando: {tec}...")
                     
@@ -1082,12 +1087,11 @@ else:
 
                     progreso.progress((i + 1) / len(tecnicas_seleccionadas))
                     time.sleep(5) 
-                
+
                 st.session_state['res'] = informe_final
                 st.session_state['tecnicas_usadas'] = ", ".join(tecnicas_seleccionadas)
                 st.success("✅ Informe Generado")
-                st.markdown("---")
-                st.markdown(informe_final)
+                
                 # =========================================================
                 # 🕸️ MÓDULO DE VISUALIZACIÓN + DESCARGAS
                 # (Pegar esto justo debajo de 'st.markdown(informe_final)')
@@ -1207,4 +1211,5 @@ if 'res' in st.session_state and st.session_state['res']:
     try: 
         c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state.get('tecnicas_usadas','Varios'), st.session_state['origen_dato'])), "Reporte.pdf", use_container_width=True)
     except: pass
+
 
