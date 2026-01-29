@@ -1087,24 +1087,55 @@ else:
                 st.success("✅ Informe Generado")
                 st.markdown("---")
                 st.markdown(informe_final)
-                # ---------------------------------------------------------
-                # 🕸️ MÓDULO DE VISUALIZACIÓN (Palantir-Style)
-                # ---------------------------------------------------------
+                # =========================================================
+                # 🕸️ MÓDULO DE VISUALIZACIÓN + DESCARGAS
+                # (Pegar esto justo debajo de 'st.markdown(informe_final)')
+                # =========================================================
                 st.markdown("---")
-                st.subheader("🕸️ Mapa de Relaciones (Visualización de Inteligencia)")
+                st.subheader("🕸️ Mapa de Relaciones (Visualización)")
                 
-                # Creamos un contenedor visual
                 with st.spinner("🛰️ Trazando red de actores y conflictos..."):
-                    # Llamamos a la función usando el informe completo que acabamos de generar
+                    # Generamos el objeto grafo
                     grafo, error_visual = generar_esquema_graphviz(informe_final, st.session_state['api_key'])
                     
                     if grafo:
-                        # Renderizamos el gráfico interactivo
+                        # 1. MOSTRAR EN PANTALLA
                         st.graphviz_chart(grafo, use_container_width=True)
-                        st.caption("Gráfico generado automáticamente basado en el análisis textual (Lenguaje DOT).")
+                        st.caption("Gráfico generado automáticamente (IA).")
+                        
+                        # 2. SECCIÓN DE DESCARGA
+                        st.markdown("### 📥 Exportar Mapa")
+                        col_d1, col_d2 = st.columns(2)
+                        
+                        try:
+                            # Intentamos convertir el grafo a PNG (Requiere Graphviz instalado en el sistema)
+                            img_png = grafo.pipe(format='png')
+                            
+                            with col_d1:
+                                st.download_button(
+                                    label="💾 Descargar Imagen (PNG)",
+                                    data=img_png,
+                                    file_name="mapa_inteligencia.png",
+                                    mime="image/png",
+                                    use_container_width=True
+                                )
+                                
+                            # Intentamos convertir a PDF
+                            pdf_bytes = grafo.pipe(format='pdf')
+                            with col_d2:
+                                st.download_button(
+                                    label="📄 Descargar Vectorial (PDF)",
+                                    data=pdf_bytes,
+                                    file_name="mapa_inteligencia.pdf",
+                                    mime="application/pdf",
+                                    use_container_width=True
+                                )
+                        except Exception as e:
+                            st.warning("⚠️ El mapa se ve, pero no se puede descargar.")
+                            st.error(f"Razón técnica: Falta el ejecutable de Graphviz en el servidor/PC. Error: {e}")
+                            
                     elif error_visual:
-                        st.warning(f"⚠️ No se pudo generar la visualización: {error_visual}")
-                # ---------------------------------------------------------
+                        st.warning(f"⚠️ No se pudo generar la visualización. Detalle: {error_visual}")
 
             except Exception as e: st.error(f"Error: {e}")
 
@@ -1114,6 +1145,7 @@ if 'res' in st.session_state:
     c1.download_button("Descargar Word", crear_word(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato']), "Reporte.docx")
     try: c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato'])), "Reporte.pdf")
     except: pass
+
 
 
 
