@@ -821,30 +821,52 @@ def obtener_texto_web(url):
     except Exception as e: return f"Error: {e}"
 
 def procesar_youtube(url, api_key):
-    video_id = url.split("v=")[-1].split("&")[0] if "v=" in url else url.split("/")[-1]
-    
-    # 1. INTENTO: TRANSCRIPCIÓN OFICIAL (Más rápido y seguro)
+    # 1. Extraer ID del video limpiamente
+    if "v=" in url:
+        video_id = url.split("v=")[-1].split("&")[0]
+    elif "youtu.be" in url:
+        video_id = url.split("/")[-1].split("?")[0]
+    else:
+        return "❌ Error: URL de YouTube no válida.", "Error"
+
     try:
-        t = YouTubeTranscriptApi.get_transcript(video_id, languages=['es', 'en'])
-        texto = " ".join([i['text'] for i in t])
-        return texto, "Subtítulos Oficiales"
-    except Exception as e:
-        # Si falla (no hay subtítulos), pasamos al Plan B
-        st.info(f"⚠️ Sin subtítulos. Iniciando descarga de audio para IA (Esto puede tardar)...")
+        # --- ESTRATEGIA A: INTELIGENCIA DE TRANSCRIPCIONES (Evita descarga de audio) ---
+        # Listamos TODAS las transcripciones disponibles (no solo 'es' o 'en')
+        transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
         
-        # CONFIGURACIÓN ANTI-BLOQUEO (User-Agent)
+        # Intentamos obtener la mejor posible
+        try:
+            # 1. Buscar manual en español o inglés
+            t = transcript_list.find_transcript(['es', 'en'])
+        except:
+            # 2. Si no hay, buscar CUALQUIERA generada automáticamente
+            try:
+                t = transcript_list.find_generated_transcript(['es', 'en'])
+            except:
+                # 3. Si tampoco, agarrar la primera que exista (ej: ruso, chino)
+                t = next(iter(transcript_list))
+        
+        # TRADUCCIÓN AUTOMÁTICA AL ESPAÑOL (Si no está en español)
+        if t.language_code != 'es':
+            t = t.translate('es')
+            
+        # Convertir a texto plano
+        texto_final = " ".join([i['text'] for i in t.fetch()])
+        return texto_final, "Subtítulos (API)"
+
+    except Exception as e_transcript:
+        # --- ESTRATEGIA B: FUERZA BRUTA (Solo si falla A) ---
+        print(f"Fallo transcripción: {e_transcript}. Iniciando descarga de audio...")
+        
+        # ADVERTENCIA: Si estás en un servidor Cloud (Streamlit/Colab), esto fallará (403).
+        # Si estás en local, puede funcionar.
         opts = {
             'format': 'bestaudio/best',
             'outtmpl': '%(id)s.%(ext)s',
             'postprocessors': [{'key': 'FFmpegExtractAudio','preferredcodec': 'mp3'}],
             'quiet': True,
             'nocheckcertificate': True,
-            # ESTO ES LO NUEVO: Simulamos ser un navegador real
-            'http_headers': {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Accept-Language': 'en-us,en;q=0.5',
-            }
+            'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         }
         
         try:
@@ -852,27 +874,29 @@ def procesar_youtube(url, api_key):
                 info = ydl.extract_info(url, download=True)
                 fname = f"{info['id']}.mp3"
             
-            # Subir a Gemini para transcripción
+            # Procesar con Gemini
             genai.configure(api_key=api_key)
             myfile = genai.upload_file(fname)
             
-            with st.spinner("🎧 IA escuchando y transcribiendo..."):
-                while myfile.state.name == "PROCESSING":
-                    time.sleep(2)
-                    myfile = genai.get_file(myfile.name)
-                
-                model = genai.GenerativeModel("gemini-1.5-flash")
-                res = model.generate_content([myfile, "Transcribe este audio detalladamente."])
+            while myfile.state.name == "PROCESSING":
+                time.sleep(2)
+                myfile = genai.get_file(myfile.name)
+            
+            model = genai.GenerativeModel("gemini-1.5-flash")
+            res = model.generate_content([myfile, "Transcribe este audio detalladamente."])
             
             # Limpieza
             if os.path.exists(fname): os.remove(fname)
             myfile.delete()
-            
-            return res.text, "Audio Transcrito por IA"
-            
-        except Exception as e:
-            return f"❌ Error Fatal: YouTube bloqueó la descarga (403). Intenta con un video que tenga subtítulos activados. Detalle: {e}", "Error"
+            return res.text, "Audio IA (Whisper/Gemini)"
 
+        except Exception as e_dl:
+            # MENSAJE FINAL DE ERROR CONTROLADO
+            return (f"❌ BLOQUEO DE SEGURIDAD YOUTUBE:\n"
+                    f"1. El video no tiene subtítulos (ni manuales ni automáticos).\n"
+                    f"2. YouTube bloqueó la descarga del audio (Error 403).\n"
+                    f"SOLUCIÓN: Usa un video que tenga la opción 'CC' (Subtítulos) activada."), "Error Fatal"
+            
 def generar_esquema_graphviz(texto_analisis, api_key):
     """Genera código DOT para visualizar relaciones."""
     try:
@@ -1158,6 +1182,7 @@ if 'res' in st.session_state:
     c1.download_button("Descargar Word", crear_word(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato']), "Reporte.docx")
     try: c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato'])), "Reporte.pdf")
     except: pass
+
 
 
 
