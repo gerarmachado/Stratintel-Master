@@ -880,7 +880,7 @@ def limpiar_texto(t):
 class PDFReport(FPDF):
     def header(self):
         self.set_font('Arial', 'B', 12)
-        self.cell(0, 10, 'StratIntel Report V16', 0, 1, 'C')
+        self.cell(0, 10, 'StratIntel Report', 0, 1, 'C')
         self.ln(5)
     def footer(self):
         self.set_y(-15)
@@ -1022,15 +1022,14 @@ else:
                 ctx = st.session_state['texto_analisis']
 
                 INSTRUCCIONES_ESTILO = """
-                IMPORTANTE - EXTENSIÓN DEL REPORTE:
-                El usuario requiere un 'Dossier de Inteligencia Profunda' y exhaustivo.
-                1. NO RESUMAS. Extiéndete al máximo en cada punto.
-                2. Cada respuesta debe tener una extensión académica considerable (Mínimo 800-1000 palabras por técnica).
-                3. Usa párrafos detallados, ejemplos históricos, citas teóricas completas y contraargumentos.
-                4. Si hay listas, explica cada punto detalladamente.
-                5. El objetivo es generar volumen y profundidad.
+                DIRECTRICES DE EXTENSIÓN Y FORMATO:
+                1. EXTENSIÓN OBLIGATORIA: El cliente requiere un informe exhaustivo. Está PROHIBIDO RESUMIR.
+                2. DESARROLLO: Cada punto o pregunta debe responderse con un mínimo de 3 a 4 párrafos densos.
+                3. RIGOR: Incluye citas textuales del documento, antecedentes históricos y matices teóricos.
+                4. TONO: Usa un tono académico, formal y de inteligencia militar.
+                5. META: Generar el mayor volumen de texto útil posible.
                 """
-                
+                                
                 # BÚSQUEDA WEB
                 contexto_web = ""
                 if usar_internet:
@@ -1121,6 +1120,7 @@ if 'res' in st.session_state:
     c1.download_button("Descargar Word", crear_word(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato']), "Reporte.docx")
     try: c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato'])), "Reporte.pdf")
     except: pass
+
 
 
 
