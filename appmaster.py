@@ -1087,6 +1087,24 @@ else:
                 st.success("✅ Informe Generado")
                 st.markdown("---")
                 st.markdown(informe_final)
+                # ---------------------------------------------------------
+                # 🕸️ MÓDULO DE VISUALIZACIÓN (Palantir-Style)
+                # ---------------------------------------------------------
+                st.markdown("---")
+                st.subheader("🕸️ Mapa de Relaciones (Visualización de Inteligencia)")
+                
+                # Creamos un contenedor visual
+                with st.spinner("🛰️ Trazando red de actores y conflictos..."):
+                    # Llamamos a la función usando el informe completo que acabamos de generar
+                    grafo, error_visual = generar_esquema_graphviz(informe_final, st.session_state['api_key'])
+                    
+                    if grafo:
+                        # Renderizamos el gráfico interactivo
+                        st.graphviz_chart(grafo, use_container_width=True)
+                        st.caption("Gráfico generado automáticamente basado en el análisis textual (Lenguaje DOT).")
+                    elif error_visual:
+                        st.warning(f"⚠️ No se pudo generar la visualización: {error_visual}")
+                # ---------------------------------------------------------
 
             except Exception as e: st.error(f"Error: {e}")
 
