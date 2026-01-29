@@ -996,6 +996,7 @@ else:
                 genai.configure(api_key=st.session_state['api_key'])
                 model = genai.GenerativeModel(MODELO_ACTUAL)
                 ctx = st.session_state['texto_analisis']
+                if 'codigo_dot_mapa' in st.session_state: del st.session_state['codigo_dot_mapa']
 
                 INSTRUCCIONES_ESTILO = """
                 DIRECTRICES DE EXTENSIÓN Y FORMATO:
@@ -1139,41 +1140,71 @@ else:
 
             except Exception as e: st.error(f"Error: {e}")
 
-if 'res' in st.session_state:
+# ==========================================================
+# 🏁 BLOQUE PERSISTENTE (Se mantiene tras descargar)
+# ==========================================================
+if 'res' in st.session_state and st.session_state['res']:
+    
+    # 1. MOSTRAR EL INFORME DE TEXTO
     st.markdown("---")
+    st.markdown(st.session_state['res'])
+    
+    # 2. GENERACIÓN DEL GRÁFICO (Solo si no existe en memoria)
+    if 'codigo_dot_mapa' not in st.session_state:
+        st.markdown("---")
+        st.subheader("🕸️ Mapa de Relaciones (Visualización)")
+        with st.spinner("🛰️ Trazando red de actores y conflictos..."):
+            # Llamamos a la API
+            grafo, error = generar_esquema_graphviz(st.session_state['res'], st.session_state['api_key'])
+            if grafo:
+                # GUARDAMOS EL CÓDIGO FUENTE EN MEMORIA
+                st.session_state['codigo_dot_mapa'] = grafo.source 
+            elif error:
+                st.error(f"Error generando mapa: {error}")
+
+    # 3. VISUALIZACIÓN Y DESCARGA (Usando la memoria)
+    if 'codigo_dot_mapa' in st.session_state:
+        try:
+            # Reconstruimos el gráfico desde la memoria (sin llamar a la IA de nuevo)
+            grafo_final = graphviz.Source(st.session_state['codigo_dot_mapa'])
+            
+            st.markdown("---")
+            st.subheader("🕸️ Mapa de Relaciones")
+            st.graphviz_chart(grafo_final, use_container_width=True)
+            
+            # --- ZONA DE DESCARGA (Ahora sí funciona) ---
+            st.markdown("### 📥 Exportar Mapa")
+            c_d1, c_d2 = st.columns(2)
+            
+            # Renderizar a bytes
+            img_png = grafo_final.pipe(format='png')
+            pdf_bytes = grafo_final.pipe(format='pdf')
+            
+            with c_d1:
+                st.download_button(
+                    label="💾 Descargar PNG",
+                    data=img_png,
+                    file_name="stratintel_map.png",
+                    mime="image/png",
+                    use_container_width=True
+                )
+            with c_d2:
+                st.download_button(
+                    label="📄 Descargar PDF",
+                    data=pdf_bytes,
+                    file_name="stratintel_map.pdf",
+                    mime="application/pdf",
+                    use_container_width=True
+                )
+        except Exception as e:
+            st.warning("⚠️ Mapa visible pero no descargable (Falta Graphviz en el sistema).")
+
+    # 4. BOTONES DEL INFORME DE TEXTO
+    st.markdown("---")
+    st.markdown("### 📥 Exportar Informe Escrito")
     c1, c2 = st.columns(2)
-    c1.download_button("Descargar Word", crear_word(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato']), "Reporte.docx")
-    try: c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato'])), "Reporte.pdf")
+    c1.download_button("Descargar Word", crear_word(st.session_state['res'], st.session_state.get('tecnicas_usadas','Varios'), st.session_state['origen_dato']), "Reporte.docx", use_container_width=True)
+    try: 
+        c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state.get('tecnicas_usadas','Varios'), st.session_state['origen_dato'])), "Reporte.pdf", use_container_width=True)
     except: pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
