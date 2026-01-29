@@ -1015,12 +1015,53 @@ with t3:
     u = st.text_input("URL"); 
     if st.button("Web"): st.session_state['texto_analisis']=obtener_texto_web(u); st.session_state['origen_dato']=f"Web: {u}"; st.success("OK")
 with t4:
-    y = st.text_input("YouTube")
-    if st.button("Video"):
-        with st.spinner("..."):
-            t,m=procesar_youtube(y,st.session_state['api_key'])
-            if m!="Error": st.session_state['texto_analisis']=t; st.session_state['origen_dato']=f"YT: {y}"; st.success("OK")
-            else: st.error(t)
+    st.markdown("### 📺 Inteligencia de Video (YouTube)")
+    col_yt_1, col_yt_2 = st.columns([3, 1])
+    
+    with col_yt_1:
+        y = st.text_input("Enlace del Video de YouTube")
+    
+    with col_yt_2:
+        st.markdown("<br>", unsafe_allow_html=True) # Espacio visual
+        boton_auto = st.button("🔄 Analizar Auto")
+
+    # Variable de estado para controlar si mostramos el fallback manual
+    if 'mostrar_manual_yt' not in st.session_state: st.session_state['mostrar_manual_yt'] = False
+
+    if boton_auto and y:
+        with st.spinner("📡 Interceptando señal de YouTube..."):
+            # Intentamos procesar
+            t, m = procesar_youtube(y, st.session_state['api_key'])
+            
+            # VERIFICACIÓN ESTRICTA DE ERRORES
+            # Si el tipo (m) contiene "Error" o el texto (t) empieza con "❌", ES UN FALLO.
+            if "Error" in m or t.startswith("❌"):
+                st.error(t) # Mostramos el error visualmente
+                st.warning("⚠️ PROTCOLO DE CONTINGENCIA ACTIVADO: YouTube bloqueó la IP del servidor.")
+                st.session_state['mostrar_manual_yt'] = True # Activamos modo manual
+            else:
+                # ÉXITO: Guardamos el texto limpio
+                st.session_state['texto_analisis'] = t
+                st.session_state['origen_dato'] = f"YouTube Intel: {y}"
+                st.session_state['mostrar_manual_yt'] = False
+                st.success(f"✅ Transcripción extraída ({len(t)} caracteres)")
+
+    # --- ZONA DE FALLBACK (SI FALLA LA AUTOMATIZACIÓN) ---
+    if st.session_state['mostrar_manual_yt']:
+        st.markdown("---")
+        st.subheader("📝 Ingreso Manual de Transcripción")
+        st.info("💡 **Cómo obtenerla en 10 segundos:** Ve al video en YouTube > Clic en '...más' (descripción) > 'Mostrar transcripción' > Copia todo el texto y pégalo abajo.")
+        
+        texto_manual_yt = st.text_area("Pegar Transcripción Aquí:", height=300)
+        
+        if st.button("💾 Cargar Transcripción Manual"):
+            if len(texto_manual_yt) > 50:
+                st.session_state['texto_analisis'] = texto_manual_yt
+                st.session_state['origen_dato'] = f"YouTube (Manual): {y}"
+                st.success("✅ Datos cargados correctamente. Ve a 'Ejecutar Misión'.")
+                st.session_state['mostrar_manual_yt'] = False # Ocultamos para limpiar
+            else:
+                st.warning("⚠️ El texto es muy corto.")
 with t5:
     m = st.text_area("Manual")
     if st.button("Fijar"): st.session_state['texto_analisis']=m; st.session_state['origen_dato']="Manual"; st.success("OK")
@@ -1182,6 +1223,7 @@ if 'res' in st.session_state:
     c1.download_button("Descargar Word", crear_word(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato']), "Reporte.docx")
     try: c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato'])), "Reporte.pdf")
     except: pass
+
 
 
 
