@@ -890,11 +890,11 @@ class PDFReport(FPDF):
 def crear_pdf(texto, tecnicas, fuente):
     pdf = PDFReport()
     pdf.add_page()
-    pdf.set_font("Arial", "B", 10)
-    pdf.multi_cell(0, 5, limpiar_texto(f"Fuente: {fuente}\nTécnicas: {tecnicas}"))
+    pdf.set_font("Arial", "B", 12)
+    pdf.multi_cell(0, 7, limpiar_texto(f"Fuente: {fuente}\nTécnicas: {tecnicas}"))
     pdf.ln(5)
-    pdf.set_font("Arial", "", 10)
-    pdf.multi_cell(0, 5, limpiar_texto(texto))
+    pdf.set_font("Arial", "", 12)
+    pdf.multi_cell(0, 7, limpiar_texto(texto))
     return pdf.output(dest='S').encode('latin-1', 'replace')
 
 def crear_word(texto, tecnicas, fuente):
@@ -1020,6 +1020,16 @@ else:
                 genai.configure(api_key=st.session_state['api_key'])
                 model = genai.GenerativeModel(MODELO_ACTUAL)
                 ctx = st.session_state['texto_analisis']
+
+                INSTRUCCIONES_ESTILO = """
+                IMPORTANTE - EXTENSIÓN DEL REPORTE:
+                El usuario requiere un 'Dossier de Inteligencia Profunda' y exhaustivo.
+                1. NO RESUMAS. Extiéndete al máximo en cada punto.
+                2. Cada respuesta debe tener una extensión académica considerable (Mínimo 800-1000 palabras por técnica).
+                3. Usa párrafos detallados, ejemplos históricos, citas teóricas completas y contraargumentos.
+                4. Si hay listas, explica cada punto detalladamente.
+                5. El objetivo es generar volumen y profundidad.
+                """
                 
                 # BÚSQUEDA WEB
                 contexto_web = ""
@@ -1064,6 +1074,8 @@ else:
                     METODOLOGÍA: {tec}
                     PIR (Requerimiento de Inteligencia): {pir}
                     
+                    {INSTRUCCIONES_ESTILO}
+                    
                     {instruccion_preguntas}
                     
                     CONTEXTO DOCUMENTAL:
@@ -1078,7 +1090,9 @@ else:
                     exito = False
                     while intentos < 3 and not exito:
                         try:
-                            res = model.generate_content(prompt, generation_config=genai.types.GenerationConfig(temperature=temp))
+                            config_generacion = genai.types.GenerationConfig(temperature=temp, max_output_tokens=8192)
+                            
+                            res = model.generate_content(prompt, generation_config=config_generacion)
                             informe_final += f"\n\n## 📌 {tec}\n{res.text}\n\n---\n"
                             exito = True
                         except Exception as e:
@@ -1107,6 +1121,7 @@ if 'res' in st.session_state:
     c1.download_button("Descargar Word", crear_word(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato']), "Reporte.docx")
     try: c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato'])), "Reporte.pdf")
     except: pass
+
 
 
 
