@@ -823,7 +823,7 @@ def generar_esquema_graphviz(texto_analisis, api_key):
     try:
         genai.configure(api_key=api_key)
         # Usamos el modelo flash por velocidad
-        model = genai.GenerativeModel("gemini-1.5-flash") 
+        model = genai.GenerativeModel("gemini-2.5-flash") 
         
         prompt = f"""
         ACTÚA COMO: Experto en Visualización de Datos de Inteligencia.
@@ -1114,6 +1114,7 @@ if 'res' in st.session_state:
     c1.download_button("Descargar Word", crear_word(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato']), "Reporte.docx")
     try: c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state['tecnicas_usadas'], st.session_state['origen_dato'])), "Reporte.pdf")
     except: pass
+
 
 
 
