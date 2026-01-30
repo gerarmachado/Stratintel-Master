@@ -1006,12 +1006,15 @@ else:
                 ctx = st.session_state['texto_analisis']
 
                 INSTRUCCIONES_ESTILO = """
-                DIRECTRICES DE EXTENSIÓN Y FORMATO:
-                1. EXTENSIÓN OBLIGATORIA: El cliente requiere un informe exhaustivo. Está PROHIBIDO RESUMIR.
-                2. DESARROLLO: Cada punto o pregunta debe responderse con un mínimo de 3 a 4 párrafos densos.
-                3. RIGOR: Incluye citas textuales del documento, antecedentes históricos y matices teóricos.
-                4. TONO: Usa un tono académico, formal y de inteligencia militar.
-                5. META: Generar el mayor volumen de texto útil posible.
+                DIRECTRICES DE FORMATO Y ESTRUCTURA (IMPORTANTE):
+                1. FORMATO VISUAL: El cliente requiere un informe exhaustivo. Está PROHIBIDO RESUMIR. Usa OBLIGATORIAMENTE:
+                   - Títulos y Subtítulos (##, ###) para separar ideas.
+                   - Viñetas (Listas) para enumerar hallazgos.
+                   - **Negritas** para resaltar actores clave, amenazas y datos críticos.
+                2. ENFOQUE: Prioriza el análisis directo (BLUF: Bottom Line Up Front). Ve al grano con rigor académico, formal y de inteligencia estratégica.
+                3. EXTENSIÓN: La necesaria para cubrir el tema en profundidad, con párrafos legibles.
+                4. CITAJE: Mantén las citas textuales y fuentes, son vitales para la validez.
+                5. TONO: Usa un tono académico, formal y de inteligencia militar.
                 """
                                 
                 # 3. BÚSQUEDA WEB
@@ -1160,5 +1163,6 @@ if 'res' in st.session_state and st.session_state['res']:
     try: 
         c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state.get('tecnicas_usadas','Varios'), st.session_state['origen_dato'])), "Reporte.pdf", use_container_width=True)
     except: pass
+
 
 
