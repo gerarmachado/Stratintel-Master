@@ -49,7 +49,7 @@ API_KEY_FIJA = ""
 if "GOOGLE_API_KEY" in st.secrets:
     API_KEY_FIJA = st.secrets["GOOGLE_API_KEY"]
 
-MODELO_ACTUAL = "gemini-2.5-pro"  
+MODELO_ACTUAL = "gemini-2.5-flash"  
 
 # ==========================================
 # 🧠 BASE DE DATOS MAESTRA (GRAND UNIFIED STRATEGY)
@@ -823,7 +823,7 @@ def generar_esquema_graphviz(texto_analisis, api_key):
     try:
         genai.configure(api_key=api_key)
         # Usamos el modelo flash por velocidad
-        model = genai.GenerativeModel("gemini-2.5-pro") 
+        model = genai.GenerativeModel("gemini-2.5-flash") 
         
         prompt = f"""
         ACTÚA COMO: Experto en Visualización de Datos de Inteligencia.
@@ -1001,8 +1001,8 @@ else:
 
                 # 2. CONFIGURACIÓN
                 genai.configure(api_key=st.session_state['api_key'])
-                # CORRECCIÓN MODELO: Usamos 2.5-pro para mejor razonamiento o flash para velocidad
-                model = genai.GenerativeModel("gemini-2.5-pro") 
+                # CORRECCIÓN MODELO: Usamos 2.5-flash para mejor razonamiento o flash para velocidad
+                model = genai.GenerativeModel("gemini-2.5-flash") 
                 ctx = st.session_state['texto_analisis']
 
                 INSTRUCCIONES_ESTILO = """
@@ -1160,4 +1160,5 @@ if 'res' in st.session_state and st.session_state['res']:
     try: 
         c2.download_button("Descargar PDF", bytes(crear_pdf(st.session_state['res'], st.session_state.get('tecnicas_usadas','Varios'), st.session_state['origen_dato'])), "Reporte.pdf", use_container_width=True)
     except: pass
+
 
